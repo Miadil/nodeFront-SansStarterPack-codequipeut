@@ -1,0 +1,4 @@
+.movieGlobalList {
+  display: flex;
+  flex-wrap: wrap;
+}
