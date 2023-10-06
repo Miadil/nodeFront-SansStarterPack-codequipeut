@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../contexts/authContext";
 import movieAPI from "../services/movieAPI";
 import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useAuthContext();
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -13,8 +16,8 @@ function Login() {
     movieAPI
       .post("/api/auth/login", { email, password })
       .then((res) => {
-        console.log(res);
-
+        setUser(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/movies");
       })
       .catch((err) => console.error(err));

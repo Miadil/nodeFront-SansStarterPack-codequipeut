@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
-import movieApi from "../services/movieApi";
+import movieApi from "../services/movieApi.js";
 import MovieCard from "../components/MovieCard";
 import "./MovieList.css";
 
 function MovieList() {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
+    console.log("je suis la ");
     movieApi
       .get("/api/movie")
-      .then((res) => setMovies(res.data))
+      .then((res) => console.log("je suis la 2 ") || setMovies(res.data))
       .catch((err) => console.log(err));
   }, []);
   return (
